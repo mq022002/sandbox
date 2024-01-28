@@ -1,5 +1,5 @@
 // https://nextjs.org/learn/dashboard-app/fetching-data#using-sql
-// This allows us to query the database.
+// This allows us to query the database using Vercel Postgres SDK.
 import { sql } from '@vercel/postgres';
 import {
   CustomerField,
