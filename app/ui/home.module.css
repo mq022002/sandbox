@@ -1,0 +1,9 @@
+/* https://nextjs.org/learn/dashboard-app/css-styling#css-modules */
+/* Essentially, CSS modules auto-generate unique class names, which prevent style conflicts. Very useful in larger applications. */
+.shape {
+    height: 0;
+    width: 0;
+    border-bottom: 30px solid black;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+  }
