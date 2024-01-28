@@ -50,6 +50,15 @@ export default function Page() {
             className="hidden md:block"
             alt="Screenshots of the dashboard project showing desktop version"
           />
+          {/* https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#practice-adding-the-mobile-hero-image */}
+          {/* This exercise was much more straightforward, not much to elaborate here. */}
+          <Image
+            src="/hero-mobile.png"
+            width={560}
+            height={620}
+            className="block md:hidden"
+            alt="Screenshot of the dashboard project showing mobile version"
+          />
         </div>
       </div>
     </main>
