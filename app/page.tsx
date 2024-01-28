@@ -42,7 +42,7 @@ export default function Page() {
         <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
           {/* Add Hero Images Here */}
           {/* https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#adding-the-desktop-hero-image */}
-          {/* Adding an image using the <Image> component allows us to take advantage of automatic image optimization, avoiding problems that would typically be present when adding images with regular HTML. */}
+          {/* Adding an image using the <Image> component allows us to take advantage of automatic image optimization, avoiding problems that would typically be present when adding images with regular HTML. To add to that, setting the width and height is recommended to avoid layout shift. The browser doesn't initially know the dimensions of an image, and when it does become known, the layout has to adjust. */}
           <Image
             src="/hero-desktop.png"
             width={1000}
