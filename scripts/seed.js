@@ -1,3 +1,6 @@
+// https://nextjs.org/learn/dashboard-app/setting-up-your-database#seed-your-database
+// https://nextjs.org/learn/dashboard-app/getting-started#placeholder-data
+// This script uses SQL to create tables, and then populates them with data from the placeholder-data.js file mentioned in Chapter 1.
 const { db } = require('@vercel/postgres');
 const {
   invoices,
