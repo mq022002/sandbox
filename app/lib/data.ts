@@ -12,6 +12,8 @@ import {
 } from './definitions';
 import { formatCurrency } from './utils';
 
+// https://nextjs.org/learn/dashboard-app/fetching-data#fetching-data-for-revenuechart
+// What is this doing is using a try-catch block attepting to fetch revenue data from the database.
 export async function fetchRevenue() {
   // Add noStore() here to prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
