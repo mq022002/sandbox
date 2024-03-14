@@ -61,6 +61,19 @@ def search_for_artist(token, artist_name):
     Returns:
         dict: A dictionary containing the JSON response from the Spotify API.
 
+    Raises:
+        None
+
+    Example:
+        >>> token = "your_access_token"
+        >>> artist_name = "Frank Sinatra"
+        >>> search_for_artist(token, artist_name)
+        {
+            'id': '06HL4z0CvFAxyc27GXpf02',
+            'name': 'Frank Sinatra',
+            'type': 'artist',
+            ...
+        }
     """
     url = "https://api.spotify.com/v1/search"
     headers = get_auth_header(token)
@@ -68,9 +81,35 @@ def search_for_artist(token, artist_name):
 
     query_url = url + query
     result = get(query_url, headers=headers)
-    json_result = json.loads(result.content)
-    print(json_result)
+    json_result = json.loads(result.content)["artists"]["items"]
+    if len(json_result) == 0:
+        print("uh oh 🦧, specified artist does not exist")
+        return None
+
+    return json_result[0]
+
+
+def get_songs_by_artist(token, artist_id):
+    """
+    Retrieves the top tracks of an artist from the Spotify API.
+
+    Parameters:
+    - token (str): The access token for authenticating the API request.
+    - artist_id (str): The unique identifier of the artist.
+
+    Returns:
+    - list: A list of dictionaries representing the top tracks of the artist.
+    """
+    url = f"https://api.spotify.com/v1/artists/{artist_id}/top-tracks?country=US"
+    headers = get_auth_header(token)
+    result = get(url, headers=headers)
+    json_result = json.loads(result.content)["tracks"]
+    return json_result
 
 
 token = get_token()
-search_for_artist(token, "The Beatles")
+result = search_for_artist(token, "The Beatles")
+artist_id = result["id"]
+songs = get_songs_by_artist(token, artist_id)
+songs_json = json.dumps(songs, indent=4)
+print(songs_json)
