@@ -134,6 +134,7 @@ const styles = StyleSheet.create({
   editTodoButton: {
     backgroundColor: "#ffc107",
     padding: 10,
+    marginRight: 10,
   },
   deleteTodoButton: {
     backgroundColor: "#ff0000",
