@@ -1,4 +1,5 @@
 {
+  "name": "nextjs-financial-dashboard",
   "private": true,
   "scripts": {
     "build": "next build",
