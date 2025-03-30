@@ -1,13 +1,7 @@
-"use client";
-
-import PushNotificationManager from "@/components/PushNotificationManger";
-import InstallPrompt from "@/components/InstallPrompt";
-
-export default function Page() {
+export default function HomePage() {
   return (
-    <div>
-      <PushNotificationManager />
-      <InstallPrompt />
-    </div>
+    <>
+      <div></div>
+    </>
   );
 }
