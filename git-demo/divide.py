@@ -1,5 +1,8 @@
 def divide(x, y):
-    return x * y
+    if y == 0:
+        return "Can't divide by 0"
+    else:
+        return x / y
 
 
 print(divide(6, 3))
