@@ -30,11 +30,11 @@ npm i
 cd ../
 echo "==================== FINISH nextjs-progressive-web-app ===================="
 
-echo "==================== START nextjs-progressive-web-app2 ===================="
-cd nextjs-progressive-web-app2
+echo "==================== START nextjs-pages-router ===================="
+cd nextjs-pages-router
 npm i
 cd ../
-echo "==================== FINISH nextjs-progressive-web-app2 ===================="
+echo "==================== FINISH nextjs-pages-router ===================="
 
 echo "==================== START react-native-to-do-list ===================="
 cd react-native-to-do-list
