@@ -41,17 +41,18 @@ export default function ProductsPage() {
 
   return (
     <>
-      <div className="text-center text-lg font-bold underline pb-2 tracking-widest">
+      <div className="text-center text-lg font-bold tracking-widest">
         PRODUCTS
       </div>
+      <div className="border-b mx-4 my-2"></div>
       <div className="text-center">
         {loading ? (
           <div>Loading products...</div>
         ) : error ? (
           <div>Error: {error?.message}</div>
         ) : (
-          <div className="text-left">
-            <ul className="py-4 px-10 rounded border mx-4">
+          <div className="text-left ">
+            <ul className="py-4 px-10 rounded border mx-4 hover:shadow-lg">
               {products.map((product: any) => {
                 const price = prices.find(
                   (price: any) => price.product === product.id,
@@ -63,12 +64,34 @@ export default function ProductsPage() {
                       <div>
                         <div>{product.name}</div>
                         <div>{product.description}</div>
+                        <div>
+                          Price:{" "}
+                          {price
+                            ? `$${(price.unit_amount / 100).toFixed(2)}`
+                            : "Price not found"}
+                        </div>
                       </div>
                       <div>
-                        Price:{" "}
-                        {price
-                          ? `$${(price.unit_amount / 100).toFixed(2)}`
-                          : "Price not found"}
+                        {price ? (
+                          <form
+                            action="/api/post/checkout/session"
+                            method="POST"
+                          >
+                            <input
+                              type="hidden"
+                              name="priceId"
+                              value={price.id}
+                            />
+                            <button
+                              type="submit"
+                              className="cursor-pointer hover:text-blue-500"
+                            >
+                              Checkout
+                            </button>
+                          </form>
+                        ) : (
+                          <div>Price not available</div>
+                        )}
                       </div>
                     </div>
                   </li>
