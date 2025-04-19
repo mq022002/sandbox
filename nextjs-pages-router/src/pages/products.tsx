@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useProductContext } from "@/contexts/ProductContext";
 
 interface Price {
   id: string;
@@ -7,37 +8,51 @@ interface Price {
 }
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState([]);
-  const [prices, setPrices] = useState<Price[]>([]);
+  const {
+    products: contextProducts,
+    prices: contextPrices,
+    setProducts,
+    setPrices,
+  } = useProductContext();
+  const [products, setProductsState] = useState(contextProducts);
+  const [prices, setPricesState] = useState<Price[]>(contextPrices);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<any>(null);
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const productsResponse = await fetch("/api/get/products");
-        if (!productsResponse.ok) {
-          throw new Error(`HTTP error! Status: ${productsResponse.status}`);
-        }
-        const productsData = await productsResponse.json();
-        setProducts(productsData.products);
+    if (contextProducts.length === 0 || contextPrices.length === 0) {
+      async function fetchData() {
+        try {
+          const productsResponse = await fetch("/api/get/products");
+          if (!productsResponse.ok) {
+            throw new Error(`HTTP error! Status: ${productsResponse.status}`);
+          }
+          const productsData = await productsResponse.json();
+          setProducts(productsData.products);
+          setProductsState(productsData.products);
 
-        const pricesResponse = await fetch("/api/get/prices");
-        if (!pricesResponse.ok) {
-          throw new Error(`HTTP error! Status: ${pricesResponse.status}`);
-        }
-        const pricesData = await pricesResponse.json();
-        setPrices(pricesData.prices);
+          const pricesResponse = await fetch("/api/get/prices");
+          if (!pricesResponse.ok) {
+            throw new Error(`HTTP error! Status: ${pricesResponse.status}`);
+          }
+          const pricesData = await pricesResponse.json();
+          setPrices(pricesData.prices);
+          setPricesState(pricesData.prices);
 
-        setLoading(false);
-      } catch (error: any) {
-        setError(error);
-        setLoading(false);
+          setLoading(false);
+        } catch (error: any) {
+          setError(error);
+          setLoading(false);
+        }
       }
-    }
 
-    fetchData();
-  }, []);
+      fetchData();
+    } else {
+      setProductsState(contextProducts);
+      setPricesState(contextPrices);
+      setLoading(false);
+    }
+  }, [contextProducts, contextPrices, setProducts, setPrices]);
 
   return (
     <>
